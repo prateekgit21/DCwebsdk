@@ -46,7 +46,7 @@
     const eventId = button.id;
     const interactionName = button.innerText;
     const destinationUrl = button.getAttribute('data-url');
-
+console.log("Tracking CTA:", eventId, interactionName, destinationUrl);
     // Send event to Salesforce Data Cloud
     SalesforceInteractions.sendEvent({
       interaction: {
