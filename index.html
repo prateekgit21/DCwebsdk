@@ -1,143 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Simple Website</title>
+<title>CTA Links Page</title>
 
 <style>
 body{
-    font-family: Arial;
-    text-align:center;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 100px;
 }
 
-button{
-    padding:10px 20px;
-    margin:10px;
-    font-size:16px;
-    cursor:pointer;
-}
-
-.page{
-    display:none;
-}
-
-.active{
-    display:block;
-}
-
-.grid2{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-    margin:20px;
-}
-
-.grid4{
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr 1fr;
-    gap:10px;
-    margin:20px;
-}
-
-.box{
-    background:lightblue;
-    padding:20px;
+.btn{
+    padding: 12px 24px;
+    margin: 10px;
+    font-size: 16px;
+    cursor: pointer;
 }
 </style>
 
 </head>
 <body>
 
-<!-- HOME PAGE -->
+<h1>Simple CTA Buttons</h1>
 
-<div id="home" class="page active">
-<h1>Home Page</h1>
+<a href="https://www.google.com">
+<button id="ctaGoogle" class="btn">Go to Google</button>
+</a>
 
-<button onclick="showPage('page1')">Page 1</button>
-<button onclick="showPage('page2')">Page 2</button>
-<button onclick="showPage('page3')">Page 3</button>
-</div>
+<a href="https://www.yahoo.com">
+<button id="ctaYahoo" class="btn">Go to Yahoo</button>
+</a>
 
-
-<!-- PAGE 1 -->
-
-<div id="page1" class="page">
-<h1>Page 1</h1>
-
-<p>This is page 1</p>
-
-<button onclick="showPage('home')">Back</button>
-</div>
-
-
-<!-- PAGE 2 -->
-
-<div id="page2" class="page">
-<h1>Page 2</h1>
-
-<h2>2 x 2 Columns</h2>
-
-<div class="grid2">
-<div class="box">1</div>
-<div class="box">2</div>
-<div class="box">3</div>
-<div class="box">4</div>
-</div>
-
-
-<h2>4 x 4 Columns</h2>
-
-<div class="grid4">
-<div class="box">1</div>
-<div class="box">2</div>
-<div class="box">3</div>
-<div class="box">4</div>
-
-<div class="box">5</div>
-<div class="box">6</div>
-<div class="box">7</div>
-<div class="box">8</div>
-
-<div class="box">9</div>
-<div class="box">10</div>
-<div class="box">11</div>
-<div class="box">12</div>
-
-<div class="box">13</div>
-<div class="box">14</div>
-<div class="box">15</div>
-<div class="box">16</div>
-</div>
-
-<button onclick="showPage('home')">Back</button>
-</div>
-
-
-<!-- PAGE 3 -->
-
-<div id="page3" class="page">
-<h1>Page 3</h1>
-
-<p>This is page 3</p>
-
-<button onclick="showPage('home')">Back</button>
-</div>
-
-
-<script>
-
-function showPage(pageId){
-
-let pages = document.querySelectorAll(".page");
-
-pages.forEach(function(page){
-page.classList.remove("active");
-});
-
-document.getElementById(pageId).classList.add("active");
-
-}
-
-</script>
+<a href="https://www.bing.com">
+<button id="ctaBing" class="btn">Go to Bing</button>
+</a>
 
 </body>
 </html>
