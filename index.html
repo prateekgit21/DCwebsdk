@@ -1,39 +1,82 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>CTA Links Page</title>
-
-<style>
-body{
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin-top: 100px;
-}
-
-.btn{
-    padding: 12px 24px;
-    margin: 10px;
-    font-size: 16px;
-    cursor: pointer;
-}
-</style>
-
+  <title>CTA Links Page</title>
+  <style>
+    body{
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 100px;
+    }
+    .btn{
+        padding: 12px 24px;
+        margin: 10px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+  </style>
+  <!-- Salesforce Data Cloud SDK (replace YOUR-ACCOUNT-ID) -->
+  <script src="https://cdn.c360a.salesforce.com/beacon/c360a/388a51f8-256f-4af6-9889-8f55b6f03596/scripts/c360a.min.js"></script>
+    <script>
+    SalesforceInteractions.init({
+      consents:[
+        {
+          status: SalesforceInteractions.ConsentStatus.OptIn,
+          purpose: SalesforceInteractions.ConsentPurpose.Tracking,
+          provider: 'Test Provider'
+        }
+      ]
+    });
+  </script>
+  <script>
+    SalesforceInteractions.init();
+  </script>
 </head>
 <body>
 
 <h1>Simple CTA Buttons</h1>
 
-<a href="https://www.google.com">
-<button id="ctaGoogle" class="btn">Go to Google</button>
-</a>
+<button id="ctaGoogle" class="btn" data-url="https://www.google.com">Go to Google</button>
+<button id="ctaYahoo" class="btn" data-url="https://www.yahoo.com">Go to Yahoo</button>
+<button id="ctaBing" class="btn" data-url="https://www.bing.com">Go to Bing</button>
 
-<a href="https://www.yahoo.com">
-<button id="ctaYahoo" class="btn">Go to Yahoo</button>
-</a>
+<script>
+  function trackCTA(event) {
+    const button = event.target;
+    const eventId = button.id;
+    const interactionName = button.innerText;
+    const destinationUrl = button.getAttribute('data-url');
 
-<a href="https://www.bing.com">
-<button id="ctaBing" class="btn">Go to Bing</button>
-</a>
+    // Send event to Salesforce Data Cloud
+    SalesforceInteractions.sendEvent({
+      interaction: {
+        name: "CTA_Click",
+        catalogObject: {
+          type: "CTA",
+          id: eventId,
+          attributes: {
+            name: interactionName,
+            destinationUrl: destinationUrl,
+            sourceUrl: window.location.href,
+            sourceUrlReferrer: document.referrer,
+            dateTime: new Date().toISOString(),
+            sessionId: sessionStorage.getItem('sessionId') || 'session-xyz',
+            deviceId: localStorage.getItem('deviceId') || 'device-abc'
+          }
+        }
+      }
+    });
+
+    // Optional: Delay navigation to ensure tracking
+    event.preventDefault();
+    setTimeout(() => { window.location.href = destinationUrl; }, 200);
+  }
+
+  document.getElementById('ctaGoogle').addEventListener('click', trackCTA);
+  document.getElementBy
+Id('ctaYahoo').addEventListener('click', trackCTA);
+  document.getElementById('ctaBing').addEventListener('click', trackCTA);
+</script>
 
 </body>
 </html>
